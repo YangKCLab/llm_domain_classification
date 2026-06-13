@@ -7,7 +7,7 @@
 As LLMs increasingly help curate and filter information in search engines, chatbots, and recommendation systems, their ability to accurately evaluate news sources directly impacts the quality and reliability of information they provide to users.
 This project evaluates how well Large Language Models (LLMs) can assess the credibility and categorize news sources.
 
-See our [dashboard](https://yang3kc.github.io/llm_domain_classification/) for the results and methods.
+See our [dashboard](https://yangkclab.github.io/llm_domain_classification/) for the results and methods.
 
 ## Citation
 
