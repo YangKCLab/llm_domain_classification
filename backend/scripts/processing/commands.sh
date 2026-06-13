@@ -15,6 +15,22 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/o1-2024-1
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5-nano-2025-08-07.parquet gpt-5-nano-2025-08-07 OpenAI reasoning
 
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5-mini-2025-08-07.parquet gpt-5-mini-2025-08-07 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5-2025-08-07.parquet gpt-5-2025-08-07 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.1-2025-11-13.parquet gpt-5.1-2025-11-13 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.2-2025-12-11.parquet gpt-5.2-2025-12-11 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.4-nano-2026-03-17.parquet gpt-5.4-nano-2026-03-17 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.4-mini-2026-03-17.parquet gpt-5.4-mini-2026-03-17 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.4-2026-03-05.parquet gpt-5.4-2026-03-05 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.5-2026-04-23.parquet gpt-5.5-2026-04-23 OpenAI reasoning
+
 # Anthropic
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-5-haiku-20241022.parquet claude-3-5-haiku-20241022 Anthropic non_reasoning
 

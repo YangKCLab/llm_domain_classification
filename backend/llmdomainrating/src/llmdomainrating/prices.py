@@ -10,6 +10,18 @@ model_prices = {
         "o3-mini-2025-01-31": {"input": 1.1, "output": 4.4, "cached_input": 0.55},
         "o4-mini-2025-04-16": {"input": 1.1, "output": 4.4, "cached_input": 0.275},
         "gpt-5-nano-2025-08-07": {"input": 0.05, "output": 0.4, "cached_input": 0.005},
+        "gpt-5-mini-2025-08-07": {"input": 0.25, "output": 2, "cached_input": 0.025},
+        "gpt-5-2025-08-07": {"input": 1.25, "output": 10, "cached_input": 0.125},
+        "gpt-5.1-2025-11-13": {"input": 1.25, "output": 10, "cached_input": 0.125},
+        "gpt-5.2-2025-12-11": {"input": 1.75, "output": 14, "cached_input": 0.175},
+        "gpt-5.4-nano-2026-03-17": {"input": 0.2, "output": 1.25, "cached_input": 0.02},
+        "gpt-5.4-mini-2026-03-17": {
+            "input": 0.75,
+            "output": 4.5,
+            "cached_input": 0.075,
+        },
+        "gpt-5.4-2026-03-05": {"input": 2.5, "output": 15, "cached_input": 0.25},
+        "gpt-5.5-2026-04-23": {"input": 5, "output": 30, "cached_input": 0.5},
     },
     "Anthropic": {
         "claude-3-5-haiku-20241022": {
