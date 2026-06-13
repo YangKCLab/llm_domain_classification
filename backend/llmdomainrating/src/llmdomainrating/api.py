@@ -39,7 +39,7 @@ class OpenAIClient(BaseClient):
         self.client = OpenAI(api_key=self.api_key)
 
     def query_model(self, domain: str, model: str) -> str:
-        if model.startswith("o"):
+        if model.startswith("o") or model.startswith("gpt-5"):
             resp = self.response_api_reasoning(domain, model)
         else:
             resp = self.response_api(domain, model)

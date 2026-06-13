@@ -37,3 +37,11 @@ uv run parse_openai.py openai o1-2024-12-17 ../../../data/intermediate/raw_respo
 uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai o3-2025-04-16 ../../../data/intermediate/raw_responses/openai/o3-2025-04-16
 
 uv run parse_openai.py openai o3-2025-04-16 ../../../data/intermediate/raw_responses/openai/o3-2025-04-16 ../../../data/intermediate/parsed_responses/openai/o3-2025-04-16.parquet
+
+# GPT-5 nano (reasoning model, but honors the strict json_schema so its message text
+# is already clean JSON -> skip extract_ratings.py and use reconcile_direct.py)
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5-nano-2025-08-07 ../../../data/intermediate/raw_responses/openai/gpt-5-nano-2025-08-07_raw
+
+uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5-nano-2025-08-07_raw ../../../data/intermediate/raw_responses/openai/gpt-5-nano-2025-08-07
+
+uv run parse_openai.py openai gpt-5-nano-2025-08-07 ../../../data/intermediate/raw_responses/openai/gpt-5-nano-2025-08-07 ../../../data/intermediate/parsed_responses/openai/gpt-5-nano-2025-08-07.parquet
