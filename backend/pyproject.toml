@@ -19,4 +19,9 @@ dependencies = [
 ]
 
 [tool.uv.sources]
-llmdomainrating = { path = "llmdomainrating", editable = true }
+llmdomainrating = { workspace = true, editable = true }
+
+[tool.uv.workspace]
+members = [
+    "llmdomainrating",
+]
