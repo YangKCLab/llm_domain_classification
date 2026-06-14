@@ -93,7 +93,7 @@ uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5
 uv run parse_openai.py openai gpt-5.4-mini-2026-03-17 ../../../data/intermediate/raw_responses/openai/gpt-5.4-mini-2026-03-17 ../../../data/intermediate/parsed_responses/openai/gpt-5.4-mini-2026-03-17.parquet
 
 # GPT-5.4
-uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5.4-2026-03-05 ../../../data/intermediate/raw_responses/openai/gpt-5.4-2026-03-05_raw
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5.4-2026-03-05 ../../../data/intermediate/raw_responses/openai/gpt-5.4-2026-03-05_raw 20
 
 uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5.4-2026-03-05_raw ../../../data/intermediate/raw_responses/openai/gpt-5.4-2026-03-05
 
