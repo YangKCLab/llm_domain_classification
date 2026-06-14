@@ -42,6 +42,24 @@ model_prices = {
             "cache_write": 3.75,
             "cache_read": 0.3,
         },
+        "claude-haiku-4-5-20251001": {
+            "input": 1,
+            "output": 4,
+            "cache_write": 1,
+            "cache_read": 0.08,
+        },
+        "claude-sonnet-4-5-20250929": {
+            "input": 3,
+            "output": 15,
+            "cache_write": 3.75,
+            "cache_read": 0.3,
+        },
+        "claude-opus-4-5-20251101": {
+            "input": 5,
+            "output": 25,
+            "cache_write": 6.25,
+            "cache_read": 0.5,
+        },
     },
     "XAI": {
         "grok-3-beta": {
