@@ -1,0 +1,1 @@
+{"model_name": "claude-haiku-4-5-20251001", "company": "Anthropic", "n": 4543, "rho": 0.5790062950428072, "rho_p": 0.0, "rho_stars": "***", "t": -8.414119320011599, "t_p": 5.2418819627147907e-17, "t_stars": "***", "left_n": 2965, "right_n": 1578, "date": "2026-06-14", "cost": 3.787192, "reasoning_type": "non_reasoning"}
