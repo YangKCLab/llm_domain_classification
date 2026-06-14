@@ -14,6 +14,8 @@ n_threads = int(sys.argv[5]) if len(sys.argv) > 5 else N_THREADS
 client = create_api_client(provider)
 domains_to_query = get_domain_to_query(domain_list_path, output_root)
 
+print(f"Workers: {n_threads}")
+
 
 def query_one(domain):
     resp = client.query_model(domain, model)
