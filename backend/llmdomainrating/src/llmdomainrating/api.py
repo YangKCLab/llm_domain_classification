@@ -166,7 +166,19 @@ class TogetherClient(BaseClient):
         self.client = Together(api_key=self.api_key)
 
     def query_model(self, domain: str, model: str) -> str:
-        reasoning_models = set(["deepseek-ai/DeepSeek-R1"])
+        reasoning_models = set(
+            [
+                "deepseek-ai/DeepSeek-R1",
+                "deepseek-ai/DeepSeek-V4-Pro",
+                "deepseek-ai/DeepSeek-V4-Flash",
+                "openai/gpt-oss-20b",
+                "openai/gpt-oss-120b",
+                "moonshotai/Kimi-K2.6",
+                "MiniMaxAI/MiniMax-M2.7",
+                "MiniMaxAI/MiniMax-M3",
+                "zai-org/GLM-5.1",
+            ]
+        )
         if model in reasoning_models:
             resp = self.query_reasoning_model(domain, model)
         else:

@@ -105,6 +105,44 @@ model_prices = {
             "input": 3,
             "output": 7,
         },
+        # Keys are the short model name (no org prefix) to match the name passed
+        # to parse_together.py / TogetherCostCalculator; the org-prefixed full IDs
+        # are used on the query side (commands.sh + api.py reasoning_models set).
+        "DeepSeek-V4-Pro": {
+            "input": 2.10,
+            "output": 4.40,
+        },
+        # DeepSeek-V4-Flash is not on Together's published serverless pricing as
+        # of 2026-06; values below are a best estimate from third-party listings
+        # and must be verified (model may not be serverless-available on Together).
+        "DeepSeek-V4-Flash": {
+            "input": 0.14,
+            "output": 0.28,
+        },
+        "gpt-oss-20b": {
+            "input": 0.05,
+            "output": 0.20,
+        },
+        "gpt-oss-120b": {
+            "input": 0.15,
+            "output": 0.60,
+        },
+        "Kimi-K2.6": {
+            "input": 1.20,
+            "output": 4.50,
+        },
+        "MiniMax-M2.7": {
+            "input": 0.30,
+            "output": 1.20,
+        },
+        "MiniMax-M3": {
+            "input": 0.30,
+            "output": 1.20,
+        },
+        "GLM-5.1": {
+            "input": 1.40,
+            "output": 4.40,
+        },
     },
     "Google": {
         "gemini-2.0-flash": {
