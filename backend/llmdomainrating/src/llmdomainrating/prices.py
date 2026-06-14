@@ -71,6 +71,18 @@ model_prices = {
             "output": 0.5,
             "reasoning_tokens": 0.5,
         },
+        "grok-4.3": {
+            "input": 1.25,
+            "output": 2.5,
+        },
+        "grok-4.20-0309-reasoning": {
+            "input": 1.25,
+            "output": 2.5,
+        },
+        "grok-4.20-0309-non-reasoning": {
+            "input": 1.25,
+            "output": 2.5,
+        },
     },
     "Together": {
         "Llama-3.3-70B-Instruct-Turbo": {
@@ -176,10 +188,13 @@ class XAICostCalculator(CostCalculatorBase):
 
     def _extract_token_count(self, resp_obj: dict) -> dict:
         usage = resp_obj["usage"]
+        # Non-reasoning Grok models may omit completion_tokens_details or
+        # reasoning_tokens, so default to 0 rather than KeyError-ing.
+        completion_details = usage.get("completion_tokens_details") or {}
         token_count = {
             "input": usage["prompt_tokens"],
             "output": usage["completion_tokens"],
-            "reasoning_tokens": usage["completion_tokens_details"]["reasoning_tokens"],
+            "reasoning_tokens": completion_details.get("reasoning_tokens", 0),
         }
         return token_count
 
