@@ -109,8 +109,8 @@ model_prices = {
         # to parse_together.py / TogetherCostCalculator; the org-prefixed full IDs
         # are used on the query side (commands.sh + api.py reasoning_models set).
         "DeepSeek-V4-Pro": {
-            "input": 2.10,
-            "output": 4.40,
+            "input": 1.74,
+            "output": 3.48,
         },
         # DeepSeek-V4-Flash is not on Together's published serverless pricing as
         # of 2026-06; values below are a best estimate from third-party listings
