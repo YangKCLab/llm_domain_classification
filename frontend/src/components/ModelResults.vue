@@ -117,7 +117,7 @@ const isWithinMonth = (dateStr) => {
     <!-- Filters -->
     <div class="flex flex-col gap-4 justify-center items-center mb-6">
       <div class="flex flex-wrap gap-4 items-center">
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2 justify-center">
           <label v-for="company in uniqueCompanies" :key="company" class="label cursor-pointer gap-2">
             <input
               type="checkbox"
