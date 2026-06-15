@@ -18,22 +18,40 @@ from llmdomainrating.api import TogetherClient as TC
 
 def test_status_and_reset_together_sdk_shape():
     """Regression: the Together SDK stores headers + http_status directly on the
-    exception (no .response). _status_and_reset must honor x-ratelimit-reset
-    from exc.headers, not only exc.response.headers."""
+    exception (no .response), and the headers are a case-insensitive dict with
+    mixed-case keys. _status_and_reset must honor X-RateLimit-Reset from
+    exc.headers regardless of case."""
     from together import error as terr
+    from requests.structures import CaseInsensitiveDict
 
     exc = terr.RateLimitError(
-        message="rate limited", headers={"x-ratelimit-reset": "37"}, http_status=429
+        message="rate limited",
+        headers=CaseInsensitiveDict({"X-RateLimit-Reset": "37"}),
+        http_status=429,
     )
     status, reset = TC._status_and_reset(exc)
     assert status == 429, status
     assert reset == 37.0, reset
 
 
+def test_status_and_reset_retry_after_mixed_case():
+    """Retry-After (mixed case) is honored as a fallback delay source."""
+    from requests.structures import CaseInsensitiveDict
+
+    exc = types.SimpleNamespace(
+        http_status=503,
+        headers=CaseInsensitiveDict({"Retry-After": "9"}),
+        response=None,
+    )
+    status, reset = TC._status_and_reset(exc)
+    assert status == 503 and reset == 9.0, (status, reset)
+
+
 def test_status_and_reset_httpx_shape():
     """Fallback path: headers on exc.response.headers (httpx/openai style)."""
     exc = types.SimpleNamespace(
         status_code=429,
+        headers=None,
         response=types.SimpleNamespace(
             status_code=429, headers={"x-ratelimit-reset": "12"}
         ),

@@ -189,16 +189,22 @@ class TogetherClient(BaseClient):
             or getattr(exc, "http_status", None)
             or getattr(exc, "code", None)
         )
+        # Together passes through requests' CaseInsensitiveDict; converting to a
+        # plain dict() preserves the original (often mixed) case, so normalize
+        # keys to lowercase before lookup or X-RateLimit-Reset / Retry-After are
+        # missed.
+        def _lower(h):
+            return {str(k).lower(): v for k, v in dict(h or {}).items()}
+
         headers = {}
         direct_headers = getattr(exc, "headers", None)
         if direct_headers:
-            headers = dict(direct_headers)
+            headers = _lower(direct_headers)
         resp = getattr(exc, "response", None)
         if resp is not None:
             status = status or getattr(resp, "status_code", None)
             if not headers:
-                headers = dict(getattr(resp, "headers", {}) or {})
-        # Header lookups are case-insensitive on httpx.Headers but dict() may lower them.
+                headers = _lower(getattr(resp, "headers", {}))
         reset_raw = headers.get("x-ratelimit-reset") or headers.get("retry-after")
         try:
             reset = float(reset_raw) if reset_raw is not None else None
