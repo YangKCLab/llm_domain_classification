@@ -5,6 +5,8 @@ import Meta from '../assets/Meta.svg'
 import DeepSeek from '../assets/DeepSeek.svg'
 import XAI from '../assets/XAI.svg'
 import MiniMax from '../assets/minimax.svg'
+import Kimi from '../assets/kimi.svg'
+import ZAI from '../assets/zai.svg'
 import logo from '../assets/logo.svg'
 
 export const companyLogos = {
@@ -15,6 +17,8 @@ export const companyLogos = {
   DeepSeek,
   XAI,
   MiniMax,
+  Kimi,
+  ZAI,
   logo
 }
 
