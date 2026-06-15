@@ -178,17 +178,26 @@ class TogetherClient(BaseClient):
     @staticmethod
     def _status_and_reset(exc) -> tuple:
         """Best-effort extraction of HTTP status and retry delay from a Together
-        SDK / httpx error. Returns (status_code_or_None, reset_seconds_or_None)."""
+        SDK / httpx error. Returns (status_code_or_None, reset_seconds_or_None).
+
+        The installed Together SDK (RateLimitError / ServiceUnavailableError)
+        stores `.headers` and `.http_status` directly on the exception (there is
+        no `.response`), so check those first; fall back to the httpx/openai
+        shape where headers live on `exc.response.headers`."""
         status = (
             getattr(exc, "status_code", None)
             or getattr(exc, "http_status", None)
             or getattr(exc, "code", None)
         )
         headers = {}
+        direct_headers = getattr(exc, "headers", None)
+        if direct_headers:
+            headers = dict(direct_headers)
         resp = getattr(exc, "response", None)
         if resp is not None:
             status = status or getattr(resp, "status_code", None)
-            headers = dict(getattr(resp, "headers", {}) or {})
+            if not headers:
+                headers = dict(getattr(resp, "headers", {}) or {})
         # Header lookups are case-insensitive on httpx.Headers but dict() may lower them.
         reset_raw = headers.get("x-ratelimit-reset") or headers.get("retry-after")
         try:
