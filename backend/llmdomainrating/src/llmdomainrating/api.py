@@ -1,4 +1,6 @@
 import os
+import time
+import random
 from dotenv import load_dotenv
 
 from openai import OpenAI
@@ -162,8 +164,65 @@ class TogetherClient(BaseClient):
             api_key = os.getenv("TOGETHER_API_KEY")
         super().__init__(api_key)
 
+    # Retry/backoff config for Together's dynamic rate limits. Together does not
+    # publish fixed RPM/TPM tiers and only surfaces the limit via an
+    # `x-ratelimit-reset` header on a 429 response, so we honor that header when
+    # present and fall back to exponential backoff with jitter otherwise.
+    MAX_RETRIES = 6
+    BASE_DELAY = 2.0  # seconds, doubled each attempt
+    MAX_DELAY = 60.0  # cap per-attempt sleep
+
     def _create_api_client(self):
         self.client = Together(api_key=self.api_key)
+
+    @staticmethod
+    def _status_and_reset(exc) -> tuple:
+        """Best-effort extraction of HTTP status and retry delay from a Together
+        SDK / httpx error. Returns (status_code_or_None, reset_seconds_or_None)."""
+        status = (
+            getattr(exc, "status_code", None)
+            or getattr(exc, "http_status", None)
+            or getattr(exc, "code", None)
+        )
+        headers = {}
+        resp = getattr(exc, "response", None)
+        if resp is not None:
+            status = status or getattr(resp, "status_code", None)
+            headers = dict(getattr(resp, "headers", {}) or {})
+        # Header lookups are case-insensitive on httpx.Headers but dict() may lower them.
+        reset_raw = headers.get("x-ratelimit-reset") or headers.get("retry-after")
+        try:
+            reset = float(reset_raw) if reset_raw is not None else None
+        except (TypeError, ValueError):
+            reset = None
+        try:
+            status = int(status) if status is not None else None
+        except (TypeError, ValueError):
+            status = None
+        return status, reset
+
+    def _create_with_backoff(self, **kwargs):
+        """Call chat.completions.create, retrying on 429 (rate limit) and 503
+        (capacity). Honors `x-ratelimit-reset` when available; otherwise uses
+        exponential backoff with jitter. Re-raises non-retriable errors and the
+        final error after MAX_RETRIES so the caller can fall back to None."""
+        for attempt in range(self.MAX_RETRIES):
+            try:
+                return self.client.chat.completions.create(**kwargs)
+            except Exception as e:
+                status, reset = self._status_and_reset(e)
+                if status not in (429, 503) or attempt == self.MAX_RETRIES - 1:
+                    raise
+                if reset is not None:
+                    delay = min(reset, self.MAX_DELAY)
+                else:
+                    delay = min(self.BASE_DELAY * (2 ** attempt), self.MAX_DELAY)
+                delay += random.uniform(0, 0.5 * delay)  # jitter to de-sync threads
+                print(
+                    f"[together] HTTP {status} on attempt {attempt + 1}/"
+                    f"{self.MAX_RETRIES}; backing off {delay:.1f}s"
+                )
+                time.sleep(delay)
 
     def query_model(self, domain: str, model: str) -> str:
         reasoning_models = set(
@@ -187,7 +246,7 @@ class TogetherClient(BaseClient):
 
     def query_normal_model(self, domain: str, model: str) -> str:
         try:
-            resp = self.client.chat.completions.create(
+            resp = self._create_with_backoff(
                 model=model,
                 messages=[
                     {"role": "system", "content": SYS_BASE},
@@ -210,7 +269,7 @@ class TogetherClient(BaseClient):
 
     def query_reasoning_model(self, domain: str, model: str) -> str:
         try:
-            resp = self.client.chat.completions.create(
+            resp = self._create_with_backoff(
                 model=model,
                 messages=[
                     {"role": "system", "content": SYS_BASE},
