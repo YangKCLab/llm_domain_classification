@@ -22,6 +22,11 @@ const router = createRouter({
       name: 'paper-rating',
       component: () => import('../views/PaperRatingView.vue'),
     },
+    {
+      path: '/changelog',
+      name: 'changelog',
+      component: () => import('../views/ChangelogView.vue'),
+    },
   ],
 })
 

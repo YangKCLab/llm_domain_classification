@@ -5,6 +5,7 @@
         <ul class="menu menu-horizontal px-1">
           <li><router-link to="/" class="btn btn-neutral text-white text-xl">Dashboard</router-link></li>
           <li><router-link to="/paper-rating" class="btn btn-neutral text-white text-xl">Paper</router-link></li>
+          <li><router-link to="/changelog" class="btn btn-neutral text-white text-xl">Changelog</router-link></li>
           <li><router-link to="/about" class="btn btn-neutral text-white text-xl">About</router-link></li>
         </ul>
       </div>
