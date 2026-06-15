@@ -1,0 +1,1 @@
+{"model_name": "claude-sonnet-4-5-20250929", "company": "Anthropic", "n": 5403, "rho": 0.5778916746409133, "rho_p": 0.0, "rho_stars": "***", "t": -10.743916132631371, "t_p": 1.1751226908053619e-26, "t_stars": "***", "left_n": 3382, "right_n": 2021, "date": "2026-06-14", "cost": 14.940957000000001, "reasoning_type": "non_reasoning"}
