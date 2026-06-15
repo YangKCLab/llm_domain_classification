@@ -4,6 +4,7 @@ import Google from '../assets/Google.svg'
 import Meta from '../assets/Meta.svg'
 import DeepSeek from '../assets/DeepSeek.svg'
 import XAI from '../assets/XAI.svg'
+import MiniMax from '../assets/minimax.svg'
 import logo from '../assets/logo.svg'
 
 export const companyLogos = {
@@ -13,6 +14,7 @@ export const companyLogos = {
   Meta,
   DeepSeek,
   XAI,
+  MiniMax,
   logo
 }
 
