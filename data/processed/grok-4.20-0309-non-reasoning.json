@@ -1,0 +1,1 @@
+{"model_name": "grok-4.20-0309-non-reasoning", "company": "XAI", "n": 4766, "rho": 0.48737155468183274, "rho_p": 6.729682201340166e-283, "rho_stars": "***", "t": -1.5883475693512705, "t_p": 0.11227412621978285, "t_stars": "NS", "left_n": 3230, "right_n": 1536, "date": "2026-06-15", "cost": 3.44924375, "reasoning_type": "non_reasoning"}
