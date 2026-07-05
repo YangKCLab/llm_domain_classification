@@ -94,6 +94,14 @@ class OpenAIClient(BaseClient):
 
 
 class AnthropicClient(BaseClient):
+    # 5-generation Claude models (Sonnet 5, and future siblings) reject
+    # non-default sampling params (temperature -> HTTP 400) and default to
+    # adaptive thinking when `thinking` is omitted. For these we drop
+    # `temperature` and explicitly disable thinking so responses stay
+    # non-reasoning and comparable to the dated 3.5/3.7/4.5-gen entries. Older
+    # dated models keep the `temperature=0` path.
+    FIVE_GEN_MODELS = {"claude-sonnet-5"}
+
     def __init__(self, api_key: str = None):
         if api_key is None:
             load_dotenv()
@@ -105,7 +113,7 @@ class AnthropicClient(BaseClient):
 
     def query_model(self, domain: str, model: str) -> str:
         try:
-            resp = self.client.messages.create(
+            kwargs = dict(
                 model=model,
                 system=SYS_BASE,
                 messages=[
@@ -115,8 +123,12 @@ class AnthropicClient(BaseClient):
                     }
                 ],
                 max_tokens=8192,
-                temperature=0,
             )
+            if model in self.FIVE_GEN_MODELS:
+                kwargs["thinking"] = {"type": "disabled"}
+            else:
+                kwargs["temperature"] = 0
+            resp = self.client.messages.create(**kwargs)
             return resp.to_json()
         except Exception as e:
             print(f"Error: {e}")
