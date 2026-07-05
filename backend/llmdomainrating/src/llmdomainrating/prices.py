@@ -60,6 +60,13 @@ model_prices = {
             "cache_write": 6.25,
             "cache_read": 0.5,
         },
+        # Intro pricing in effect through 2026-08-31 (standard is 3 / 15).
+        "claude-sonnet-5": {
+            "input": 2,
+            "output": 10,
+            "cache_write": 2.5,
+            "cache_read": 0.2,
+        },
     },
     "XAI": {
         "grok-3-beta": {

@@ -27,3 +27,8 @@ uv run parse_anthropic.py anthropic claude-sonnet-4-5-20250929 ../../../data/int
 uv run ../openai/query_openai.py ../../../data/source/dashboard_query_list.csv anthropic claude-opus-4-5-20251101 ../../../data/intermediate/raw_responses/anthropic/claude-opus-4-5-20251101 20
 
 uv run parse_anthropic.py anthropic claude-opus-4-5-20251101 ../../../data/intermediate/raw_responses/anthropic/claude-opus-4-5-20251101 ../../../data/intermediate/parsed_responses/anthropic/claude-opus-4-5-20251101.parquet
+
+# Claude Sonnet 5
+uv run ../openai/query_openai.py ../../../data/source/dashboard_query_list.csv anthropic claude-sonnet-5 ../../../data/intermediate/raw_responses/anthropic/claude-sonnet-5 20
+
+uv run parse_anthropic.py anthropic claude-sonnet-5 ../../../data/intermediate/raw_responses/anthropic/claude-sonnet-5 ../../../data/intermediate/parsed_responses/anthropic/claude-sonnet-5.parquet

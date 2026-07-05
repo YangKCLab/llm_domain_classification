@@ -38,6 +38,8 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-7-sonnet-20250219.parquet claude-3-7-sonnet-20250219 Anthropic non_reasoning
 
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-sonnet-5.parquet claude-sonnet-5 Anthropic non_reasoning
+
 # XAI
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/xai/grok-3-beta.parquet grok-3-beta XAI non_reasoning
 
