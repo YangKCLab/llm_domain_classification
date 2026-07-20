@@ -31,6 +31,12 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.4-2
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.5-2026-04-23.parquet gpt-5.5-2026-04-23 OpenAI reasoning
 
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.6-luna.parquet gpt-5.6-luna OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.6-terra.parquet gpt-5.6-terra OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-5.6-sol.parquet gpt-5.6-sol OpenAI reasoning
+
 # Anthropic
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-5-haiku-20241022.parquet claude-3-5-haiku-20241022 Anthropic non_reasoning
 

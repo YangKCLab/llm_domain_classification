@@ -22,6 +22,9 @@ model_prices = {
         },
         "gpt-5.4-2026-03-05": {"input": 2.5, "output": 15, "cached_input": 0.25},
         "gpt-5.5-2026-04-23": {"input": 5, "output": 30, "cached_input": 0.5},
+        "gpt-5.6-luna": {"input": 1, "output": 6, "cached_input": 0.1},
+        "gpt-5.6-terra": {"input": 2.5, "output": 15, "cached_input": 0.25},
+        "gpt-5.6-sol": {"input": 5, "output": 30, "cached_input": 0.5}
     },
     "Anthropic": {
         "claude-3-5-haiku-20241022": {
