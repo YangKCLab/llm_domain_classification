@@ -105,3 +105,24 @@ uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-
 uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5.5-2026-04-23_raw ../../../data/intermediate/raw_responses/openai/gpt-5.5-2026-04-23
 
 uv run parse_openai.py openai gpt-5.5-2026-04-23 ../../../data/intermediate/raw_responses/openai/gpt-5.5-2026-04-23 ../../../data/intermediate/parsed_responses/openai/gpt-5.5-2026-04-23.parquet
+
+# GPT-5.6 luna
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5.6-luna ../../../data/intermediate/raw_responses/openai/gpt-5.6-luna_raw
+
+uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5.6-luna_raw ../../../data/intermediate/raw_responses/openai/gpt-5.6-luna
+
+uv run parse_openai.py openai gpt-5.6-luna ../../../data/intermediate/raw_responses/openai/gpt-5.6-luna ../../../data/intermediate/parsed_responses/openai/gpt-5.6-luna.parquet
+
+# GPT-5.6 terra
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5.6-terra ../../../data/intermediate/raw_responses/openai/gpt-5.6-terra_raw
+
+uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5.6-terra_raw ../../../data/intermediate/raw_responses/openai/gpt-5.6-terra
+
+uv run parse_openai.py openai gpt-5.6-terra ../../../data/intermediate/raw_responses/openai/gpt-5.6-terra ../../../data/intermediate/parsed_responses/openai/gpt-5.6-terra.parquet
+
+# GPT-5.6 sol
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai gpt-5.6-sol ../../../data/intermediate/raw_responses/openai/gpt-5.6-sol_raw
+
+uv run reconcile_direct.py ../../../data/intermediate/raw_responses/openai/gpt-5.6-sol_raw ../../../data/intermediate/raw_responses/openai/gpt-5.6-sol
+
+uv run parse_openai.py openai gpt-5.6-sol ../../../data/intermediate/raw_responses/openai/gpt-5.6-sol ../../../data/intermediate/parsed_responses/openai/gpt-5.6-sol.parquet
